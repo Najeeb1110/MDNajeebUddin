@@ -3,7 +3,7 @@
 
 # importing numpy module
 from numpy import random
-
+# Change the frequecy Depanding on Condition 
 frequency = 2
 # performing radom poisson
 
