@@ -1,0 +1,8 @@
+def addition(a,b):
+    return a + b
+def test_negative_number():
+    result = addition(-5,-6)
+    assert result == -11
+def test_addition_number():
+    result = addition(5,6)
+    assert result == 11
