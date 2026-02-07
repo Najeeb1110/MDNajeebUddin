@@ -1,0 +1,2115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NN AI Solutions - Complete Assessment</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a237e, #283593);
+            color: white;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 8px;
+            object-fit: cover;
+            background: white;
+            padding: 5px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .logo-text h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        .logo-text span {
+            color: #5c6bc0;
+            font-weight: 700;
+        }
+        
+        .logo-text p {
+            font-size: 0.8rem;
+            opacity: 0.9;
+            margin-top: 2px;
+        }
+        
+        /* Navigation */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 1rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+        
+        nav a:hover, nav a.active {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 2.5rem 1rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .hero h2 {
+            font-size: 2rem;
+            color: #283593;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .highlight {
+            color: #283593;
+            font-weight: 600;
+        }
+        
+        /* Timer Styles */
+        .timer-container {
+            background: linear-gradient(135deg, #ff6b6b, #ff4757);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem auto;
+            text-align: center;
+            max-width: 300px;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.3);
+        }
+        
+        .timer-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timer-display {
+            font-size: 2rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .timer-warning {
+            background: linear-gradient(135deg, #ffa502, #ff7f00);
+        }
+        
+        .timer-critical {
+            background: linear-gradient(135deg, #ff3838, #ff0000);
+            animation: pulse 1s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        
+        /* Quiz Selection */
+        .quiz-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .quiz-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .quiz-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .quiz-card-header {
+            padding: 1.5rem;
+            text-align: center;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .quiz-card.tech .quiz-card-header {
+            background: linear-gradient(135deg, #5c6bc0, #283593);
+        }
+        
+        .quiz-card.personality .quiz-card-header {
+            background: linear-gradient(135deg, #26c6da, #0097a7);
+        }
+        
+        .quiz-card-body {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .quiz-card-body h4 {
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-size: 1.2rem;
+        }
+        
+        .quiz-card-body p {
+            color: #666;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        
+        .quiz-card-body .btn {
+            margin-top: auto;
+        }
+        
+        /* Quiz Container */
+        .quiz-container {
+            display: none;
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .quiz-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .quiz-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f0f0f0;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .quiz-header h3 {
+            font-size: 1.5rem;
+            color: #283593;
+        }
+        
+        .question-counter {
+            font-weight: 600;
+            color: #5c6bc0;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background-color: #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #5c6bc0, #283593);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .question-container {
+            margin-bottom: 2rem;
+        }
+        
+        .question-number {
+            font-size: 1rem;
+            color: #5c6bc0;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+            font-weight: 500;
+        }
+        
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+        
+        .option {
+            padding: 1rem 1.2rem;
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 1rem;
+        }
+        
+        .option:hover {
+            background-color: #e9ecef;
+            transform: translateY(-2px);
+        }
+        
+        .option.selected {
+            background-color: #e3f2fd;
+            border-color: #5c6bc0;
+            color: #283593;
+        }
+        
+        .option.correct {
+            background-color: #d4edda;
+            border-color: #28a745;
+            color: #155724;
+        }
+        
+        .option.incorrect {
+            background-color: #f8d7da;
+            border-color: #dc3545;
+            color: #721c24;
+        }
+        
+        .quiz-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            gap: 1rem;
+        }
+        
+        /* Buttons */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            background-color: #283593;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+        }
+        
+        .btn:hover {
+            background-color: #1a237e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid #283593;
+            color: #283593;
+        }
+        
+        .btn-outline:hover {
+            background-color: #283593;
+            color: white;
+        }
+        
+        .btn:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        /* Results */
+        .result-container {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            display: none;
+        }
+        
+        .result-container.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5c6bc0, #283593);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 700;
+            box-shadow: 0 8px 20px rgba(92, 107, 192, 0.3);
+        }
+        
+        .score-circle span {
+            font-size: 1rem;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+        
+        .result-message {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            color: #283593;
+            line-height: 1.4;
+        }
+        
+        .result-details {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .result-details h4 {
+            color: #283593;
+            margin-bottom: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        /* User Course Info */
+        .user-course-info {
+            background-color: #e8f4fc;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            text-align: left;
+            border-left: 4px solid #5c6bc0;
+        }
+        
+        .user-course-info h4 {
+            color: #283593;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .user-course-info p {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        /* Review Section */
+        .review-section {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 1.5rem;
+            text-align: left;
+        }
+        
+        .review-section h4 {
+            color: #283593;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .question-review {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .question-review:last-child {
+            border-bottom: none;
+        }
+        
+        .review-question {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .review-answer {
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-top: 0.5rem;
+        }
+        
+        .review-correct {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding-left: 0.8rem;
+        }
+        
+        .review-incorrect {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding-left: 0.8rem;
+        }
+        
+        /* Data Collection Modal */
+        .data-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease-out;
+            padding: 1rem;
+        }
+        
+        .data-modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .modal-header h3 {
+            color: #283593;
+            font-size: 1.5rem;
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #777;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #5c6bc0;
+            box-shadow: 0 0 0 2px rgba(92, 107, 192, 0.2);
+        }
+        
+        .required::after {
+            content: " *";
+            color: #dc3545;
+        }
+        
+        .modal-footer {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .form-feedback {
+            margin-top: 1rem;
+            padding: 0.8rem;
+            border-radius: 6px;
+            display: none;
+        }
+        
+        .form-feedback.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            display: block;
+        }
+        
+        .form-feedback.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+            display: block;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+        
+        .contact-section h3 {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #283593;
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        .contact-info {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+        
+        .contact-info h4 {
+            color: #283593;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-info p {
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .contact-form input, .contact-form textarea, .contact-form select {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+        
+        .contact-form textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .contact-form button {
+            width: 100%;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #bbdefb;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+            display: none;
+        }
+        
+        .success-message.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .back-to-quizzes {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+        
+        .sheet-success {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 0.8rem;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            text-align: center;
+            display: none;
+        }
+        
+        .sheet-success.active {
+            display: block;
+        }
+        
+        /* Combined Quiz Info */
+        .combined-quiz-info {
+            background: linear-gradient(135deg, #5c6bc0, #283593);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        
+        .combined-quiz-info h4 {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        /* Time's Up Modal */
+        .time-up-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            z-index: 3000;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+        }
+        
+        .time-up-modal.active {
+            display: flex;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .time-up-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .time-up-icon {
+            font-size: 4rem;
+            color: #ff4757;
+            margin-bottom: 1.5rem;
+            animation: bounce 1s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .time-up-content h2 {
+            color: #283593;
+            margin-bottom: 1rem;
+        }
+        
+        .time-up-content p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Mobile Responsive Styles */
+        @media (max-width: 1024px) {
+            .quiz-selection {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+        }
+        
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+            
+            .logo-container {
+                width: 100%;
+                justify-content: center;
+                text-align: center;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.4rem;
+            }
+            
+            .nav-toggle {
+                display: block;
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
+            
+            nav {
+                width: 100%;
+                display: none;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                gap: 0.5rem;
+                width: 100%;
+            }
+            
+            nav a {
+                display: block;
+                text-align: center;
+                padding: 0.8rem;
+                border-radius: 6px;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            .container {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+            
+            .hero {
+                padding: 1.5rem 1rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.6rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .quiz-selection {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .quiz-card-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .quiz-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+            
+            .quiz-header h3 {
+                font-size: 1.3rem;
+            }
+            
+            .question-text {
+                font-size: 1.1rem;
+            }
+            
+            .option {
+                padding: 0.8rem 1rem;
+                font-size: 0.95rem;
+            }
+            
+            .quiz-controls {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .contact-section {
+                padding: 1.5rem;
+            }
+            
+            .contact-section h3 {
+                font-size: 1.5rem;
+            }
+            
+            .result-container {
+                padding: 1.5rem;
+            }
+            
+            .score-circle {
+                width: 120px;
+                height: 120px;
+                font-size: 2rem;
+            }
+            
+            .result-message {
+                font-size: 1.1rem;
+            }
+            
+            .modal-content {
+                padding: 1.5rem;
+            }
+            
+            .modal-footer {
+                flex-direction: column;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+            
+            .timer-display {
+                font-size: 1.5rem;
+            }
+            
+            .time-up-content {
+                padding: 2rem 1.5rem;
+            }
+            
+            .time-up-icon {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .logo-img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.4rem;
+            }
+            
+            .quiz-card-body {
+                padding: 1rem;
+            }
+            
+            .question-text {
+                font-size: 1rem;
+            }
+            
+            .option {
+                padding: 0.7rem 0.9rem;
+                font-size: 0.9rem;
+            }
+            
+            .score-circle {
+                width: 100px;
+                height: 100px;
+                font-size: 1.8rem;
+            }
+            
+            .modal-content {
+                padding: 1rem;
+            }
+            
+            .timer-container {
+                padding: 0.6rem 1rem;
+            }
+            
+            .timer-display {
+                font-size: 1.3rem;
+            }
+        }
+        
+        /* Tablet Styles */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .quiz-selection {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-container {
+                gap: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header>
+        <div class="logo-container">
+            <!-- Logo Image - Replace with your logo URL -->
+            <img src="Logo.png" alt="NN AI Solutions Logo" class="logo-img">
+            <div class="logo-text">
+                <h1>NN <span>AI Solutions</span></h1>
+                <p>Where AI Meets Innovation</p>
+            </div>
+        </div>
+        
+        <button class="nav-toggle" id="navToggle">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <nav id="mainNav">
+            <ul>
+                <li><a href="#" class="nav-home active">Home</a></li>
+                <li><a href="#" class="nav-assessment">Complete Assessment</a></li>
+                <li><a href="#" class="nav-contact">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <h2>Complete Career Assessment</h2>
+            <p>Take our comprehensive assessment covering both technical skills and personality traits. Get personalized recommendations for your tech career path.</p>
+            <p><span class="highlight">20 Questions Total (10 Technical + 10 Personality)</span> with a 15-minute timer!</p>
+            <button class="btn start-assessment-btn" id="startAssessmentBtn">Start Complete Assessment</button>
+        </section>
+
+        <!-- Timer Display -->
+        <div class="timer-container" id="timerContainer" style="display: none;">
+            <div class="timer-header">
+                <i class="fas fa-clock"></i>
+                <h3>Time Remaining</h3>
+            </div>
+            <div class="timer-display" id="timerDisplay">15:00</div>
+        </div>
+
+        <!-- Combined Quiz Container -->
+        <section class="quiz-container" id="combined-quiz">
+            <div class="quiz-header">
+                <h3 id="quiz-section-title">Technical Skills Assessment</h3>
+                <div class="question-counter" id="combined-question-counter">Question 1 of 20</div>
+            </div>
+            
+            <div class="combined-quiz-info">
+                <h4><i class="fas fa-clipboard-list"></i> Complete Assessment Progress</h4>
+                <p><span id="tech-progress-text">Technical: 0/10</span> | <span id="personality-progress-text">Personality: 0/10</span></p>
+            </div>
+            
+            <div class="progress-bar">
+                <div class="progress" id="combined-progress"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number" id="combined-question-number">Question 1</div>
+                <div class="question-text" id="combined-question">Which HTML tag is used to create a hyperlink?</div>
+                <div class="options-container" id="combined-options">
+                    <!-- Options will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="btn btn-outline" id="combined-prev">Previous</button>
+                <button class="btn" id="combined-next">Next</button>
+            </div>
+        </section>
+
+        <!-- Result Container -->
+        <section class="result-container" id="result">
+            <div class="score-circle">
+                <div id="score">0</div>
+                <span>out of 10</span>
+            </div>
+            <div class="result-message" id="result-message"></div>
+            
+            <!-- User Course Information -->
+            <div class="user-course-info" id="user-info">
+                <h4><i class="fas fa-user-graduate"></i> Your Information</h4>
+                <p><i class="fas fa-user"></i> <strong>Name:</strong> <span id="user-name">Not provided</span></p>
+                <p><i class="fas fa-phone"></i> <strong>Phone:</strong> <span id="user-phone">Not provided</span></p>
+                <p><i class="fas fa-envelope"></i> <strong>Email:</strong> <span id="user-email">Not provided</span></p>
+                <p><i class="fas fa-university"></i> <strong>College:</strong> <span id="user-college">Not provided</span></p>
+                <p><i class="fas fa-graduation-cap"></i> <strong>Course Interested:</strong> <span id="user-course">Not selected</span></p>
+            </div>
+            
+            <!-- Review Section -->
+            <div class="review-section" id="review-section">
+                <h4><i class="fas fa-clipboard-check"></i> Technical Quiz Review</h4>
+                <div id="review-questions">
+                    <!-- Questions and answers will be populated here -->
+                </div>
+            </div>
+            
+            <div class="sheet-success" id="sheet-success">
+                <i class="fas fa-check-circle"></i> Your assessment has been saved successfully!
+            </div>
+            
+            <div class="result-details">
+                <h4>Based on your results, we recommend:</h4>
+                <p>Our comprehensive training programs are designed to help you build the skills you need for a successful tech career. Based on your quiz performance and personality assessment, we'll create a personalized learning path for you.</p>
+            </div>
+            
+            <button class="btn btn-full" id="contact-btn">Get Personalized Guidance</button>
+            <div class="back-to-quizzes">
+                <button class="btn btn-outline back-to-home">Back to Home</button>
+            </div>
+        </section>
+
+        <!-- Data Collection Modal -->
+        <div class="data-modal" id="data-collection-modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3><i class="fas fa-user-circle"></i> Get Your Assessment Results</h3>
+                    <button class="close-modal" id="close-modal-btn">&times;</button>
+                </div>
+                <p style="margin-bottom: 1.5rem; color: #555;">Please provide your details to see your assessment results and receive personalized career recommendations.</p>
+                
+                <form id="user-data-form">
+                    <div class="form-group">
+                        <label for="input-name" class="required">Full Name</label>
+                        <input type="text" id="input-name" placeholder="Enter your full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="input-phone" class="required">Phone Number</label>
+                        <input type="tel" id="input-phone" placeholder="Enter your 10-digit phone number" required>
+                        <small style="color: #666; display: block; margin-top: 0.3rem;">Format: 9876543210</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="input-email">Email Address (Optional)</label>
+                        <input type="email" id="input-email" placeholder="Enter your email address">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="input-college" class="required">College/University</label>
+                        <input type="text" id="input-college" placeholder="Enter your college/university name" required>
+                        <small style="color: #666; display: block; margin-top: 0.3rem;">Enter your current or last attended college</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="input-course" class="required">Course You're Interested In</label>
+                        <select id="input-course" required>
+                            <option value="">Select a course</option>
+                            <option value="Full Stack Development">Full Stack Development</option>
+                            <option value="Data Analytics">Data Analytics</option>
+                            <option value="AI & Machine Learning">AI & Machine Learning</option>
+                            <option value="Not Sure">Not Sure - Need Guidance</option>
+                        </select>
+                        <small style="color: #666; display: block; margin-top: 0.3rem;">We'll contact you with details about this course</small>
+                    </div>
+                    
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-full" id="submit-data-btn">
+                            <span id="submit-btn-text">Submit & See My Results</span>
+                            <span id="submit-btn-loading" style="display: none;">
+                                <i class="fas fa-spinner fa-spin"></i> Sending...
+                            </span>
+                        </button>
+                    </div>
+                </form>
+                
+                <div class="form-feedback" id="form-feedback"></div>
+                
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #777; text-align: center;">
+                    <i class="fas fa-lock"></i> Your information is secure and will only be used to contact you about course details.
+                </p>
+            </div>
+        </div>
+
+        <!-- Time's Up Modal -->
+        <div class="time-up-modal" id="timeUpModal">
+            <div class="time-up-content">
+                <div class="time-up-icon">
+                    <i class="fas fa-hourglass-end"></i>
+                </div>
+                <h2>Time's Up!</h2>
+                <p>Your 15-minute assessment time has expired. The quiz will be automatically submitted with your current answers.</p>
+                <p><strong>Don't worry!</strong> You can still review your answers and submit your information to get personalized recommendations.</p>
+                <button class="btn" id="time-up-ok">OK, Continue</button>
+            </div>
+        </div>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contact-section">
+            <h3>Contact NN AI Solutions</h3>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h4><i class="fas fa-map-marker-alt"></i> Our Location</h4>
+                    <p>1st Floor, IT Hub, Nizamabad, Telangana</p>
+                    
+                    <h4><i class="fas fa-phone"></i> Contact Details</h4>
+                    <p>+91 8688663447</p>
+                    <p>info@nnaisolution.com</p>
+                    <p>www.nnaisolution.com</p>
+                    
+                    <h4><i class="fas fa-clock"></i> Training Hours</h4>
+                    <p>Monday - Friday: 11:00 AM - 7:00 PM</p>
+                    <p>Weekend Workshops: 12:00 PM - 6:00 PM</p>
+                </div>
+                
+                <div class="contact-form">
+                    <h4>Send us a Message</h4>
+                    <form id="contactForm">
+                        <input type="text" id="contact-name" placeholder="Your Name" required>
+                        <input type="email" id="contact-email" placeholder="Your Email" required>
+                        <input type="text" id="contact-phone" placeholder="Your Phone Number">
+                        <input type="text" id="contact-college" placeholder="Your College/University">
+                        <select id="contact-course-interest" required>
+                            <option value="" disabled selected>Select Course Interest</option>
+                            <option value="Full Stack Development">Full Stack Development</option>
+                            <option value="Data Analytics">Data Analytics</option>
+                            <option value="AI & Machine Learning">AI & Machine Learning</option>
+                            <option value="All Programs">All Programs</option>
+                        </select>
+                        <textarea id="contact-message" placeholder="Your Message" required></textarea>
+                        <button type="submit" class="btn btn-full">Send Message</button>
+                    </form>
+                    <div class="success-message" id="form-success">
+                        Thank you for your message! We'll contact you shortly.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 NN AI Solutions. All rights reserved.</p>
+            <p>Where AI Meets Innovation</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-graduation-cap"></i> Courses</a>
+                <a href="#"><i class="fas fa-phone"></i> Contact</a>
+                <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+            </div>
+            <p style="margin-top: 1rem;">Build Skills. Build Products. Build Careers.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Quiz Data - Combined
+        const quizData = {
+            "technical": [
+                {
+                    question: "Which HTML tag is used to create a hyperlink?",
+                    options: ["<link>", "<a>", "<href>", "<url>"],
+                    correct: 1,
+                    explanation: "The <a> tag is used to create hyperlinks in HTML."
+                },
+                {
+                    question: "Which attribute is used to provide alternative text for an image?",
+                    options: ["title", "alt", "src", "name"],
+                    correct: 1,
+                    explanation: "The 'alt' attribute provides alternative text for images for accessibility and when images can't be displayed."
+                },
+                {
+                    question: "Which CSS property controls the text size?",
+                    options: ["font-style", "text-size", "font-size", "size"],
+                    correct: 2,
+                    explanation: "The 'font-size' property controls the size of text in CSS."
+                },
+                {
+                    question: "Which symbol is used for class selectors in CSS?",
+                    options: ["#", ".", "*", "@"],
+                    correct: 1,
+                    explanation: "The dot (.) symbol is used for class selectors in CSS."
+                },
+                {
+                    question: "Which keyword is used to declare a variable in JavaScript?",
+                    options: ["var", "let", "const", "All of the above"],
+                    correct: 3,
+                    explanation: "JavaScript has three keywords for variable declaration: var, let, and const."
+                },
+                {
+                    question: "Which function is used to print output in the browser console?",
+                    options: ["print()", "console.log()", "echo()", "log()"],
+                    correct: 1,
+                    explanation: "console.log() is used to print output to the browser console."
+                },
+                {
+                    question: "Which of the following is the correct file extension for Python?",
+                    options: [".java", ".py", ".js", ".html"],
+                    correct: 1,
+                    explanation: "Python files use the .py extension."
+                },
+                {
+                    question: "Which keyword is used to define a function in Python?",
+                    options: ["function", "def", "fun", "define"],
+                    correct: 1,
+                    explanation: "The 'def' keyword is used to define functions in Python."
+                },
+                {
+                    question: "Which SQL command is used to fetch data from a table?",
+                    options: ["GET", "FETCH", "SELECT", "SHOW"],
+                    correct: 2,
+                    explanation: "The SELECT command is used to fetch data from database tables."
+                },
+                {
+                    question: "What is React mainly used for?",
+                    options: ["Database management", "Backend development", "Building user interfaces", "Server configuration"],
+                    correct: 2,
+                    explanation: "React is a JavaScript library for building user interfaces."
+                }
+            ],
+            "personality": [
+                {
+                    question: "How do you prefer to learn?",
+                    options: ["Watching videos", "Hands-on practice", "Reading notes", "All of the above"]
+                },
+                {
+                    question: "When you face a coding error, you usually:",
+                    options: ["Google the error", "Ask a friend/mentor", "Try debugging yourself", "Get frustrated and stop"]
+                },
+                {
+                    question: "What motivates you more?",
+                    options: ["High salary", "Learning new skills", "Job security", "Building something of my own"]
+                },
+                {
+                    question: "How comfortable are you with teamwork?",
+                    options: ["Very comfortable", "Somewhat comfortable", "Prefer working alone", "Depends on the team"]
+                },
+                {
+                    question: "What is your biggest challenge in learning coding?",
+                    options: ["Lack of guidance", "Fear of complex concepts", "No real-time practice", "Poor time management"]
+                },
+                {
+                    question: "How do you see yourself in 2 years?",
+                    options: ["Software developer", "Freelancer", "Startup founder", "Still exploring options"]
+                },
+                {
+                    question: "How often do you practice coding?",
+                    options: ["Daily", "3–4 times a week", "Occasionally", "Rarely"]
+                },
+                {
+                    question: "What matters more to you in training?",
+                    options: ["Certificates", "Internship experience", "Real projects", "Placement guidance"]
+                },
+                {
+                    question: "When learning something new, you prefer:",
+                    options: ["Step-by-step guidance", "Trial and error", "Watching others first", "Mixed approach"]
+                },
+                {
+                    question: "Are you ready to invest time seriously to build a tech career?",
+                    options: ["Yes, 100%", "Yes, but need guidance", "Not sure", "Just exploring"]
+                }
+            ]
+        };
+
+        // Global State
+        const quizState = {
+            currentQuestion: 0,
+            currentQuizType: 'technical', // 'technical' or 'personality'
+            technicalAnswers: new Array(10).fill(null),
+            personalityAnswers: new Array(10).fill(null),
+            technicalScore: 0,
+            technicalReviews: [],
+            timeLeft: 15 * 60, // 15 minutes in seconds
+            timerInterval: null,
+            isTimeUp: false
+        };
+
+        // DOM Elements
+        const quizContainer = document.getElementById('combined-quiz');
+        const resultContainer = document.getElementById('result');
+        const contactSection = document.getElementById('contact-section');
+        const timerContainer = document.getElementById('timerContainer');
+        const timerDisplay = document.getElementById('timerDisplay');
+        const startAssessmentBtn = document.getElementById('startAssessmentBtn');
+        const combinedQuestion = document.getElementById('combined-question');
+        const combinedOptions = document.getElementById('combined-options');
+        const combinedQuestionNumber = document.getElementById('combined-question-number');
+        const combinedQuestionCounter = document.getElementById('combined-question-counter');
+        const combinedProgress = document.getElementById('combined-progress');
+        const techProgressText = document.getElementById('tech-progress-text');
+        const personalityProgressText = document.getElementById('personality-progress-text');
+        const quizSectionTitle = document.getElementById('quiz-section-title');
+        const combinedNextBtn = document.getElementById('combined-next');
+        const combinedPrevBtn = document.getElementById('combined-prev');
+        
+        // Modals
+        const dataModal = document.getElementById('data-collection-modal');
+        const timeUpModal = document.getElementById('timeUpModal');
+        const closeModalBtn = document.getElementById('close-modal-btn');
+        const timeUpOkBtn = document.getElementById('time-up-ok');
+        
+        // Forms
+        const userDataForm = document.getElementById('user-data-form');
+        const submitDataBtn = document.getElementById('submit-data-btn');
+        const submitBtnText = document.getElementById('submit-btn-text');
+        const submitBtnLoading = document.getElementById('submit-btn-loading');
+        const formFeedback = document.getElementById('form-feedback');
+        
+        // Navigation
+        const navLinks = document.querySelectorAll('nav a');
+        const navToggle = document.getElementById('navToggle');
+        const mainNav = document.getElementById('mainNav');
+        
+        // Google Sheets URL
+        const GOOGLE_SHEET_URL = "https://script.google.com/macros/s/AKfycbyFPKMHwyICLgbSLHQQIchkCleevuggenhqNyuTw_2LRxs0Gg6OjJxTvffXPbZ6apgg/exec";
+
+        // Initialize the app
+        function initApp() {
+            // Set up mobile navigation
+            if (navToggle) {
+                navToggle.addEventListener('click', () => {
+                    mainNav.classList.toggle('active');
+                    const icon = navToggle.querySelector('i');
+                    if (mainNav.classList.contains('active')) {
+                        icon.classList.remove('fa-bars');
+                        icon.classList.add('fa-times');
+                    } else {
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            }
+            
+            // Close mobile nav when clicking a link
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 768) {
+                        mainNav.classList.remove('active');
+                        const icon = navToggle.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                });
+            });
+            
+            // Navigation
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = this.classList[0].split('-')[1];
+                    
+                    // Update active nav link
+                    navLinks.forEach(nav => nav.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (target === 'home') {
+                        showHome();
+                    } else if (target === 'assessment') {
+                        startCompleteAssessment();
+                    } else if (target === 'contact') {
+                        showContact();
+                    }
+                });
+            });
+            
+            // Start assessment button
+            startAssessmentBtn.addEventListener('click', startCompleteAssessment);
+            
+            // Quiz controls
+            combinedNextBtn.addEventListener('click', handleNextQuestion);
+            combinedPrevBtn.addEventListener('click', handlePrevQuestion);
+            
+            // Back to home button
+            document.querySelector('.back-to-home').addEventListener('click', showHome);
+            
+            // Contact button in results
+            document.getElementById('contact-btn').addEventListener('click', showContact);
+            
+            // Contact form
+            document.getElementById('contactForm').addEventListener('submit', handleContactFormSubmit);
+            
+            // Data collection modal
+            closeModalBtn.addEventListener('click', closeDataModal);
+            userDataForm.addEventListener('submit', handleUserDataSubmit);
+            dataModal.addEventListener('click', function(e) {
+                if (e.target === dataModal) {
+                    closeDataModal();
+                }
+            });
+            
+            // Time's up modal
+            timeUpOkBtn.addEventListener('click', () => {
+                timeUpModal.classList.remove('active');
+                showDataCollectionModal();
+            });
+            
+            // Show home by default
+            showHome();
+            
+            // Handle window resize
+            window.addEventListener('resize', handleResize);
+            handleResize();
+        }
+
+        // Handle window resize
+        function handleResize() {
+            if (window.innerWidth > 768) {
+                mainNav.style.display = '';
+                mainNav.classList.remove('active');
+                const icon = navToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+        }
+
+        // Show home section
+        function showHome() {
+            // Update nav
+            navLinks.forEach(nav => nav.classList.remove('active'));
+            document.querySelector('.nav-home').classList.add('active');
+            
+            // Show home
+            document.querySelector('.hero').style.display = 'block';
+            quizContainer.style.display = 'none';
+            resultContainer.classList.remove('active');
+            contactSection.style.display = 'none';
+            timerContainer.style.display = 'none';
+            dataModal.classList.remove('active');
+            
+            // Stop timer if running
+            if (quizState.timerInterval) {
+                clearInterval(quizState.timerInterval);
+                quizState.timerInterval = null;
+            }
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Show contact section
+        function showContact() {
+            // Update nav
+            navLinks.forEach(nav => nav.classList.remove('active'));
+            document.querySelector('.nav-contact').classList.add('active');
+            
+            // Show contact section
+            document.querySelector('.hero').style.display = 'none';
+            quizContainer.style.display = 'none';
+            resultContainer.classList.remove('active');
+            contactSection.style.display = 'block';
+            timerContainer.style.display = 'none';
+            dataModal.classList.remove('active');
+            
+            // Scroll to contact section
+            contactSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Start complete assessment
+        function startCompleteAssessment() {
+            // Reset state
+            quizState.currentQuestion = 0;
+            quizState.currentQuizType = 'technical';
+            quizState.technicalAnswers.fill(null);
+            quizState.personalityAnswers.fill(null);
+            quizState.technicalScore = 0;
+            quizState.technicalReviews = [];
+            quizState.timeLeft = 15 * 60;
+            quizState.isTimeUp = false;
+            
+            // Update nav
+            navLinks.forEach(nav => nav.classList.remove('active'));
+            document.querySelector('.nav-assessment').classList.add('active');
+            
+            // Hide/show sections
+            document.querySelector('.hero').style.display = 'none';
+            quizContainer.style.display = 'block';
+            quizContainer.classList.add('active');
+            resultContainer.classList.remove('active');
+            contactSection.style.display = 'none';
+            timerContainer.style.display = 'block';
+            dataModal.classList.remove('active');
+            
+            // Start timer
+            startTimer();
+            
+            // Load first question
+            loadQuestion();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Start the timer
+        function startTimer() {
+            // Clear any existing timer
+            if (quizState.timerInterval) {
+                clearInterval(quizState.timerInterval);
+            }
+            
+            // Update timer display immediately
+            updateTimerDisplay();
+            
+            // Start new timer
+            quizState.timerInterval = setInterval(() => {
+                quizState.timeLeft--;
+                updateTimerDisplay();
+                
+                // Check if time is up
+                if (quizState.timeLeft <= 0) {
+                    clearInterval(quizState.timerInterval);
+                    quizState.isTimeUp = true;
+                    showTimeUpModal();
+                }
+            }, 1000);
+        }
+
+        // Update timer display
+        function updateTimerDisplay() {
+            const minutes = Math.floor(quizState.timeLeft / 60);
+            const seconds = quizState.timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            // Update timer styling based on time left
+            timerContainer.classList.remove('timer-warning', 'timer-critical');
+            
+            if (quizState.timeLeft <= 300) { // 5 minutes
+                timerContainer.classList.add('timer-critical');
+            } else if (quizState.timeLeft <= 600) { // 10 minutes
+                timerContainer.classList.add('timer-warning');
+            }
+        }
+
+        // Show time's up modal
+        function showTimeUpModal() {
+            timeUpModal.classList.add('active');
+        }
+
+        // Load current question
+        function loadQuestion() {
+            const isTechnical = quizState.currentQuestion < 10;
+            const questionIndex = isTechnical ? quizState.currentQuestion : quizState.currentQuestion - 10;
+            const questions = isTechnical ? quizData.technical : quizData.personality;
+            const currentQuestion = questions[questionIndex];
+            
+            // Update quiz section title
+            quizSectionTitle.textContent = isTechnical ? 'Technical Skills Assessment' : 'Personality & Career Assessment';
+            
+            // Update question number and counter
+            combinedQuestionNumber.textContent = `Question ${quizState.currentQuestion + 1}`;
+            combinedQuestionCounter.textContent = `Question ${quizState.currentQuestion + 1} of 20`;
+            
+            // Update progress bar
+            combinedProgress.style.width = `${((quizState.currentQuestion + 1) / 20) * 100}%`;
+            
+            // Update quiz progress text
+            const techAnswered = quizState.technicalAnswers.filter(a => a !== null).length;
+            const personalityAnswered = quizState.personalityAnswers.filter(a => a !== null).length;
+            techProgressText.textContent = `Technical: ${techAnswered}/10`;
+            personalityProgressText.textContent = `Personality: ${personalityAnswered}/10`;
+            
+            // Update question text
+            combinedQuestion.textContent = currentQuestion.question;
+            
+            // Clear and load options
+            combinedOptions.innerHTML = '';
+            currentQuestion.options.forEach((option, index) => {
+                const optionElement = document.createElement('div');
+                optionElement.classList.add('option');
+                optionElement.textContent = option;
+                
+                // Check if this option is already selected
+                const currentAnswers = isTechnical ? quizState.technicalAnswers : quizState.personalityAnswers;
+                if (currentAnswers[questionIndex] === index) {
+                    optionElement.classList.add('selected');
+                }
+                
+                optionElement.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    combinedOptions.querySelectorAll('.option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    optionElement.classList.add('selected');
+                    
+                    // Store answer
+                    if (isTechnical) {
+                        quizState.technicalAnswers[questionIndex] = index;
+                        
+                        // Store review data for technical questions
+                        const isCorrect = index === currentQuestion.correct;
+                        quizState.technicalReviews[questionIndex] = {
+                            question: currentQuestion.question,
+                            userAnswer: option,
+                            correctAnswer: currentQuestion.options[currentQuestion.correct],
+                            isCorrect: isCorrect,
+                            explanation: currentQuestion.explanation
+                        };
+                    } else {
+                        quizState.personalityAnswers[questionIndex] = index;
+                    }
+                    
+                    // Update progress text
+                    const newTechAnswered = quizState.technicalAnswers.filter(a => a !== null).length;
+                    const newPersonalityAnswered = quizState.personalityAnswers.filter(a => a !== null).length;
+                    techProgressText.textContent = `Technical: ${newTechAnswered}/10`;
+                    personalityProgressText.textContent = `Personality: ${newPersonalityAnswered}/10`;
+                });
+                
+                combinedOptions.appendChild(optionElement);
+            });
+            
+            // Update button text if it's the last question
+            if (quizState.currentQuestion === 19) {
+                combinedNextBtn.textContent = 'Submit Assessment';
+            } else {
+                combinedNextBtn.textContent = 'Next';
+            }
+            
+            // Show/hide previous button
+            if (quizState.currentQuestion === 0) {
+                combinedPrevBtn.style.visibility = 'hidden';
+            } else {
+                combinedPrevBtn.style.visibility = 'visible';
+            }
+        }
+
+        // Handle next question
+        function handleNextQuestion() {
+            // Check if answer is selected
+            const isTechnical = quizState.currentQuestion < 10;
+            const questionIndex = isTechnical ? quizState.currentQuestion : quizState.currentQuestion - 10;
+            const currentAnswers = isTechnical ? quizState.technicalAnswers : quizState.personalityAnswers;
+            
+            if (currentAnswers[questionIndex] === null && !quizState.isTimeUp) {
+                alert('Please select an answer before proceeding.');
+                return;
+            }
+            
+            // If it's the last question, calculate score and show data collection
+            if (quizState.currentQuestion === 19) {
+                calculateScore();
+                return;
+            }
+            
+            // Move to next question
+            quizState.currentQuestion++;
+            loadQuestion();
+        }
+
+        // Handle previous question
+        function handlePrevQuestion() {
+            if (quizState.currentQuestion > 0) {
+                quizState.currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        // Calculate score
+        function calculateScore() {
+            // Calculate technical score
+            quizState.technicalScore = 0;
+            quizData.technical.forEach((question, index) => {
+                if (quizState.technicalAnswers[index] === question.correct) {
+                    quizState.technicalScore++;
+                }
+            });
+            
+            // Stop timer
+            if (quizState.timerInterval) {
+                clearInterval(quizState.timerInterval);
+                quizState.timerInterval = null;
+            }
+            
+            // Hide quiz, show data collection
+            quizContainer.style.display = 'none';
+            timerContainer.style.display = 'none';
+            showDataCollectionModal();
+        }
+
+        // Show data collection modal
+        function showDataCollectionModal() {
+            dataModal.classList.add('active');
+            userDataForm.reset();
+            
+            // Pre-select course
+            document.getElementById('input-course').value = 'Full Stack Development';
+            
+            // Scroll to modal on mobile
+            if (window.innerWidth <= 768) {
+                setTimeout(() => {
+                    dataModal.scrollIntoView({ behavior: 'smooth' });
+                }, 300);
+            }
+        }
+
+        // Close data collection modal
+        function closeDataModal() {
+            dataModal.classList.remove('active');
+            formFeedback.className = 'form-feedback';
+            formFeedback.textContent = '';
+            formFeedback.style.display = 'none';
+            
+            // If user closes without submitting, show home
+            showHome();
+        }
+
+        // Handle user data form submission
+        async function handleUserDataSubmit(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('input-name').value.trim();
+            const phone = document.getElementById('input-phone').value.trim();
+            const email = document.getElementById('input-email').value.trim();
+            const college = document.getElementById('input-college').value.trim();
+            const course = document.getElementById('input-course').value;
+            
+            // Validate form
+            if (!name || !phone || !college || !course) {
+                showFormFeedback('Please fill in all required fields.', 'error');
+                return;
+            }
+            
+            // Phone validation
+            const phoneRegex = /^\d{10}$/;
+            if (!phoneRegex.test(phone)) {
+                showFormFeedback('Please enter a valid 10-digit phone number.', 'error');
+                return;
+            }
+            
+            // Show loading state
+            submitBtnText.style.display = 'none';
+            submitBtnLoading.style.display = 'inline';
+            submitDataBtn.disabled = true;
+            
+            // Prepare technical answers object
+            const techAnswers = {};
+            quizData.technical.forEach((_, index) => {
+                const answerIndex = quizState.technicalAnswers[index];
+                techAnswers[`q${index + 1}`] = answerIndex !== null ? 
+                    quizData.technical[index].options[answerIndex] : 'Not answered';
+            });
+            
+            // Prepare personality answers object
+            const personalityAnswers = {};
+            quizData.personality.forEach((_, index) => {
+                const answerIndex = quizState.personalityAnswers[index];
+                personalityAnswers[`p${index + 1}`] = answerIndex !== null ? 
+                    quizData.personality[index].options[answerIndex] : 'Not answered';
+            });
+            
+            // Prepare data for Google Sheets
+            const payload = {
+                name: name,
+                phone: phone,
+                email: email || 'Not provided',
+                college: college,
+                course: course,
+                score: quizState.technicalScore,
+                techAnswers: techAnswers,
+                personalityAnswers: personalityAnswers,
+                timeLeft: quizState.timeLeft,
+                timeUp: quizState.isTimeUp,
+                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            };
+            
+            console.log('Sending payload:', payload);
+            
+            // Send to Google Sheets
+            const success = await sendDataToGoogleSheet(payload);
+            
+            // Hide loading state
+            submitBtnText.style.display = 'inline';
+            submitBtnLoading.style.display = 'none';
+            submitDataBtn.disabled = false;
+            
+            if (success) {
+                showFormFeedback('Your information has been submitted successfully! Showing your results...', 'success');
+                
+                // Store user data for display
+                window.userSubmittedData = {
+                    name: name,
+                    phone: phone,
+                    email: email || 'Not provided',
+                    college: college,
+                    course: course
+                };
+                
+                setTimeout(() => {
+                    dataModal.classList.remove('active');
+                    displayResults();
+                }, 1500);
+            } else {
+                showFormFeedback('Network issue, but you can still see your results.', 'error');
+                
+                setTimeout(() => {
+                    dataModal.classList.remove('active');
+                    displayResults();
+                }, 2000);
+            }
+        }
+
+        // Send data to Google Sheets
+        async function sendDataToGoogleSheet(data) {
+            try {
+                console.log('Sending data to Google Sheets:', data);
+                
+                await fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                return true;
+            } catch (error) {
+                console.error('Error sending data to Google Sheet:', error);
+                return false;
+            }
+        }
+
+        // Show form feedback
+        function showFormFeedback(message, type) {
+            formFeedback.textContent = message;
+            formFeedback.className = `form-feedback ${type}`;
+            formFeedback.style.display = 'block';
+            
+            if (type === 'error') {
+                setTimeout(() => {
+                    formFeedback.style.display = 'none';
+                }, 5000);
+            }
+        }
+
+        // Display results
+        function displayResults() {
+            // Update score
+            document.getElementById('score').textContent = quizState.technicalScore;
+            
+            // Update result message
+            const messageElement = document.getElementById('result-message');
+            if (quizState.technicalScore >= 7) {
+                messageElement.textContent = `Excellent! You scored ${quizState.technicalScore}/10. You have strong technical fundamentals!`;
+                messageElement.style.color = '#28a745';
+            } else if (quizState.technicalScore >= 5) {
+                messageElement.textContent = `Good job! You scored ${quizState.technicalScore}/10. You have basic technical knowledge that can be improved.`;
+                messageElement.style.color = '#ffc107';
+            } else {
+                messageElement.textContent = `You scored ${quizState.technicalScore}/10. Consider joining our training programs to strengthen your technical skills.`;
+                messageElement.style.color = '#dc3545';
+            }
+            
+            // Add time up message if applicable
+            if (quizState.isTimeUp) {
+                messageElement.innerHTML += '<br><strong>Note:</strong> Your time expired. Answers were submitted automatically.';
+            }
+            
+            // Update user information
+            if (window.userSubmittedData) {
+                document.getElementById('user-name').textContent = window.userSubmittedData.name;
+                document.getElementById('user-phone').textContent = window.userSubmittedData.phone;
+                document.getElementById('user-email').textContent = window.userSubmittedData.email;
+                document.getElementById('user-college').textContent = window.userSubmittedData.college;
+                document.getElementById('user-course').textContent = window.userSubmittedData.course;
+                
+                // Show success message
+                document.getElementById('sheet-success').style.display = 'block';
+            }
+            
+            // Display review for technical questions
+            if (quizState.technicalReviews.length > 0) {
+                const reviewContainer = document.getElementById('review-questions');
+                reviewContainer.innerHTML = '';
+                
+                quizState.technicalReviews.forEach((review, index) => {
+                    if (!review) return;
+                    
+                    const reviewElement = document.createElement('div');
+                    reviewElement.className = 'question-review';
+                    
+                    reviewElement.innerHTML = `
+                        <div class="review-question">Q${index + 1}: ${review.question}</div>
+                        <div class="review-answer ${review.isCorrect ? 'review-correct' : 'review-incorrect'}">
+                            <strong>Your answer:</strong> ${review.userAnswer}<br>
+                            ${!review.isCorrect ? `<strong>Correct answer:</strong> ${review.correctAnswer}<br>` : ''}
+                            <strong>Explanation:</strong> ${review.explanation}
+                        </div>
+                    `;
+                    
+                    reviewContainer.appendChild(reviewElement);
+                });
+                
+                document.getElementById('review-section').style.display = 'block';
+            }
+            
+            // Show result container
+            resultContainer.classList.add('active');
+            
+            // Scroll to results
+            setTimeout(() => {
+                resultContainer.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // Handle contact form submission
+        function handleContactFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const phone = document.getElementById('contact-phone').value;
+            const college = document.getElementById('contact-college').value;
+            const course = document.getElementById('contact-course-interest').value;
+            const message = document.getElementById('contact-message').value;
+            
+            // Show success message
+            const successMessage = document.getElementById('form-success');
+            successMessage.classList.add('active');
+            
+            // Send to Google Sheets
+            const contactData = {
+                name: name,
+                email: email,
+                phone: phone || 'Not provided',
+                college: college || 'Not provided',
+                course: course,
+                message: message,
+                type: 'Contact Form',
+                timestamp: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+            };
+            
+            sendDataToGoogleSheet(contactData);
+            
+            // Reset form
+            document.getElementById('contactForm').reset();
+            
+            // Hide success message after 5 seconds
+            setTimeout(() => {
+                successMessage.classList.remove('active');
+            }, 5000);
+        }
+
+        // Initialize app
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
